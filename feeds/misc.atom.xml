@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>blog.danclaudiupop</title><link href="http://blog.danclaudiupop.com/" rel="alternate"></link><link href="http://localhost:8000/feeds/misc.atom.xml" rel="self"></link><id>http://blog.danclaudiupop.com/</id><updated>2013-10-16T11:30:00+03:00</updated><entry><title>Stop treating testers as failed developers</title><link href="http://blog.danclaudiupop.com/stop-treating-testers-as-failed-developers/" rel="alternate"></link><updated>2013-10-16T11:30:00+03:00</updated><author><name>danclaudiupop</name></author><id>tag:blog.danclaudiupop.com,2013-10-16:stop-treating-testers-as-failed-developers/</id><summary type="html">&lt;p&gt;&lt;em&gt;&amp;quot;Stop treating testers as failed developers when developers are failed
+testers&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Thanks to &lt;a class="reference external" href="https://github.com/limpangel"&gt;Angel Ramboi&lt;/a&gt; who took the picture
+at PyCon Ireland 2013. This is &lt;a class="reference external" href="https://github.com/AutomatedTester"&gt;David Burns&lt;/a&gt;' keynote.&lt;/p&gt;
+&lt;a href="http://www.flickr.com/photos/105549603@N05/10305606266/"&gt;&lt;img src="http://farm8.staticflickr.com/7411/10305606266_3138beee0d_b.jpg" alt="IMG_20131013_130435"&gt;&lt;/a&gt;</summary><category term="tester"></category><category term="developer"></category></entry><entry><title>Command line JSON parser via jq</title><link href="http://blog.danclaudiupop.com/command-line-json-parser-via-jq/" rel="alternate"></link><updated>2013-10-14T22:30:00+03:00</updated><author><name>danclaudiupop</name></author><id>tag:blog.danclaudiupop.com,2013-10-14:command-line-json-parser-via-jq/</id><summary type="html">&lt;p&gt;A command-line JSON parser can be handy when you test or debug JSON web
+services. Unfortunately inspecting JSON responses via command line are hard to
+read and not easy to manipulate with traditional Unix utilities.&lt;/p&gt;
+&lt;p&gt;Today I stumbled on &lt;a class="reference external" href="http://stedolan.github.io/jq/"&gt;jq&lt;/a&gt;, via &lt;a class="reference external" href="https://github.com/limpangel"&gt;Angel Ramboi&lt;/a&gt;. &lt;tt class="docutils literal"&gt;jq&lt;/tt&gt; is a lightweight and flexible
+command-line JSON processor.&lt;/p&gt;
+&lt;p&gt;Download the desired binary and then &lt;tt class="docutils literal"&gt;chmod +x ./jq&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;I've prepared a sample json so we can see how easily it is to inspect and
+manipulate JSON strings.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
+
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;first&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;John&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;last&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Doe&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;age&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;27&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;sex&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;M&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;registered&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;interests&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Reading&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Mountain Biking&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hacking&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;favorites&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;quot;color&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;quot;sport&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Soccer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;quot;food&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Spaghetti&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;skills&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;quot;category&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Python&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;quot;tests&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+                &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;One&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;score&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;90&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+                &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Two&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;score&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;96&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;quot;category&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;GO&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;quot;tests&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+                &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;One&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;score&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+                &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Two&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;score&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;84&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Simple filtering:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;jq&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;.skills[].category&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;Python&lt;/span&gt;
+&lt;span class="n"&gt;Go&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Filtering with index:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;./&lt;/span&gt;&lt;span class="n"&gt;jq&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;.[&amp;quot;skills&amp;quot;][0][&amp;quot;tests&amp;quot;][1] | .name, .score&amp;#39;&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;quot;Two&amp;quot;&lt;/span&gt;
+&lt;span class="mi"&gt;96&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;...or a different flavour:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;./&lt;/span&gt;&lt;span class="n"&gt;jq&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;.skills[0].tests[1] | .name, .score&amp;#39;&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;quot;Two&amp;quot;&lt;/span&gt;
+&lt;span class="mi"&gt;96&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Built-in operators:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;./&lt;/span&gt;&lt;span class="n"&gt;jq&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;.interests | length&amp;#39;&lt;/span&gt;
+
+&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Manipulate JSON string:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;./&lt;/span&gt;&lt;span class="n"&gt;jq&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;if .registered == true then .skills[].tests[].score = 1000 else null end&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;new_sample&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Head on and read the &lt;a class="reference external" href="http://stedolan.github.io/jq/manual/"&gt;jq manual&lt;/a&gt; if you
+want to include it in your tester toolbox.&lt;/p&gt;
+</summary><category term="unix"></category></entry><entry><title>Using tail to explore logs</title><link href="http://blog.danclaudiupop.com/using-tail-to-explore-logs/" rel="alternate"></link><updated>2013-10-03T12:30:00+03:00</updated><author><name>danclaudiupop</name></author><id>tag:blog.danclaudiupop.com,2013-10-03:using-tail-to-explore-logs/</id><summary type="html">&lt;p&gt;When I am testing, I always keep an eye on the logs because they are a valuable
+resource for finding problems on the system. They can act as an early warning
+system. The &lt;tt class="docutils literal"&gt;tail&lt;/tt&gt; commnand alongside with &lt;tt class="docutils literal"&gt;view&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt; are great ways
+to explore big log entries.&lt;/p&gt;
+&lt;p&gt;Some simple examples:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="n"&gt;web_app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="n"&gt;import&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;*.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="n"&gt;web_app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="n"&gt;import&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="n"&gt;ERROR&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... or get and read log from remote host&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="n"&gt;remoteUser&lt;/span&gt;&lt;span class="nd"&gt;@remoteHost&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;tail -f /var/log/app/app.log&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;tee&lt;/span&gt; &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;less is more&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;More convenient way to monitor logs is by using less. &lt;tt class="docutils literal"&gt;less + F app.log&lt;/tt&gt;
+allows you to switch between watch mode and navigation mode with &lt;tt class="docutils literal"&gt;ctrl+c&lt;/tt&gt; and
+back to watching mode with &lt;tt class="docutils literal"&gt;F&lt;/tt&gt;. Very helpul when you need to search, find
+occurrences, create marks etc.&lt;/p&gt;
+</summary><category term="unix"></category></entry><entry><title>After Romanian Testing Conference 2013</title><link href="http://blog.danclaudiupop.com/rtc/" rel="alternate"></link><updated>2013-05-24T00:00:00+03:00</updated><author><name>danclaudiupop</name></author><id>tag:blog.danclaudiupop.com,2013-05-24:rtc/</id><summary type="html">&lt;p&gt;It’s been awhile since myself and my colleague Dan Claudiu Pop have had our
+presentation at RTC, but given that this experience has had an impact on our
+testing perspective, we decided to write a few lines on how it was and what it
+meant to us.&lt;/p&gt;
+&lt;img alt="Romanian Testing Conference 2013" src="/images/rtc_2013.png" /&gt;
+&lt;p&gt;We were pleasantly surprised to see that many colleagues share our opinions on
+software testing and this alone was enough to get us through the emotions we
+had that day, simply because we knew that we were speaking the same language.
+More and more software testers believe in the unity of the team, without the
+need of separating the tester (improperly called QA by many still) and
+developer roles.&lt;/p&gt;
+&lt;p&gt;We decided  to talk about “Our experience with BDD in Python”, and throughout
+the presentation, we did exactly that: we talked about BDD as we understood and
+practiced it. We wanted to avoid “best practices” and “how to” terminology,
+because we didn’t want to teach others how to apply this methodology. We simply
+wanted to share our knowledge on the item, how we applied it and what are the
+challenges we are facing with.&lt;/p&gt;
+&lt;p&gt;Shortly after the presentation has begun, we understood that this was the
+correct approach. People were drawn to what we had to say and we felt that the
+issues we were exposing were issues they also had encountered.&lt;/p&gt;
+&lt;p&gt;I don’t know if we managed to answer all of their questions, but as long as we
+got the audience thinking about our subject and comparing the items we
+presented with the challenges they are facing day to day, then the presentation
+was a success.&lt;/p&gt;
+&lt;p&gt;There’s no golden formula which, when applied, it magically solves all issues
+on a project. But as long as everybody has understood our message -
+communication and collaboration is everything  - then we definitely can say we
+are on the right track.&lt;/p&gt;
+&lt;p&gt;You can see the presentation here - &lt;a class="reference external" href="http://testpy.github.io/RTC-presentation/"&gt;http://testpy.github.io/RTC-presentation/&lt;/a&gt;&lt;/p&gt;
+</summary><category term="rtc"></category><category term="presentation"></category></entry><entry><title>Book review: Explore it! by Elisabeth Hendrickson</title><link href="http://blog.danclaudiupop.com/explore-it/" rel="alternate"></link><updated>2013-01-07T10:20:00+02:00</updated><author><name>Ramona Suciu</name></author><id>tag:blog.danclaudiupop.com,2013-01-07:explore-it/</id><summary type="html">&lt;p&gt;There are many ways to test a software product. There are many methodologies
+that could help in testing that software product, so that the final release
+contains as less bugs as possible. We are not at the point where we could say
+that we have found the solution for bug free applications. But we are at the
+point where we know that in order to avoid buggy, hard to use, no precise scope
+defined applications, we need an approach that will ensure a higher quality of
+the product. One of these ways could very well be Exploratory Testing, done
+right, done different.  Exploratory Testing is important.  Exploratory Testing
+can be learnt.&lt;/p&gt;
+&lt;p&gt;In my opinion, these are some of the messages that can be heard when
+reading Explore It!, by Elisabeth Hendrickson.&lt;/p&gt;
+&lt;p&gt;As Cem Kaner himself states, Exploratory Testing is a style of software
+testing that emphasizes the personal freedom and responsibility of the
+individual tester to continually optimize the quality of his/her work by
+treating test-related learning, test design, test execution, and test result
+interpretation as mutually supportive activities that run in parallel
+throughout the project.  That’s a pretty accurate definition. But what does
+this mean exactly? How could I learn to be a more creative individual, when all
+around me and my work requires 100% analytical thinking? Do I need to be more
+creative, or to have a better sense of responsibility in order to execute
+exploratory tests that actually find defects and weaknesses?&lt;/p&gt;
+&lt;p&gt;I’ve started looking for some of the answers I need through “Exploratory
+Testing”. I have to say that I found the book incredibly easy to read and
+captivating. The real-world examples were in the right places, and I could
+better visualize the applicability of a concept presented in a specific
+section. However, at some point, I felt that the examples became too detailed
+and a more high-level explanation should have sufficed (but this is maybe a
+singular opinion, I guess it depends on our own perception on exploratory
+testing).  The personas concept is something I have never thought of and it’s
+definitely something I would like to try with my team someday. The idea of role
+playing of well-defined characters, in order to cover more classes of
+vulnerabilities is one of the many out-of-the-box examples and concepts that
+are defined in this book.&lt;/p&gt;
+&lt;p&gt;All in all, I sincerely recommend this book for any tester who would like
+to better themselves. It is suitable not only for functional testers, but it
+also has a few interesting approaches for the non-functional parts of the
+system as well. It has great advices on how to perform a good interview and how
+to do well on an interview, when faced with testing unfamiliar applications.&lt;/p&gt;
+&lt;p&gt;What I realized is that I found a few answers, but I have also discovered
+new questions and for me, this is more important. It means that the book got me
+thinking and questioning - how could I become a better explorer?&lt;/p&gt;
+</summary><category term="book"></category><category term="review"></category></entry></feed>

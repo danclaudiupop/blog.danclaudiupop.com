@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Headless selenium tests in django with xvfbwrapper | blog.danclaudiupop | Software Testing and more</title>
+    <meta name="description" content="blog.danclaudiupop, Software Testing and more">
+    <meta name="author" content="danclaudiupop">
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Feeds
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="alternate" href="http://localhost:8000/feeds/all.atom.xml" type="application/atom+xml" title="blog.danclaudiupop Atom Feed" />
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/theme/css/custom.css">
+    <link rel="stylesheet" href="/theme/css/pygments.css">
+
+    <!-- Scripts
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="theme/js/site.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.1.0/jquery.fitvids.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".container").fitVids();
+        });
+    </script>
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="../../dist/images/favicon.png">
+
+</head>
+<body>
+
+    <!-- Primary Page Layout
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container">
+        <section class="header">
+            <img src="/theme/assets/stewie.jpg" class="logo">
+            <h6>blog.danclaudiupop</h6>
+        </section>
+    </div>
+    <div class="container">
+        <nav class="navbar">
+            <div class="container">
+                <ul class="navbar-list">
+                    <li class="navbar-item"><a href="http://blog.danclaudiupop.com/" class="navbar-link">Posts</a></li>
+                    <li class="navbar-item"><a href="http://blog.danclaudiupop.com/about-us.html" class="navbar-link">About</a></li>
+                    <li class="navbar-icon">
+                        <a href="http://blog.danclaudiupop.com/feeds/all.atom.xml">
+                            <i class="fa fa-rss fa-fw fa-2x"></i>
+                        </a>
+                    </li>
+                    <li class="navbar-icon">
+                        <a href="https://github.com/danclaudiupop/">
+                            <i class="fa fa-github fa-fw fa-2x"></i>
+                        </a>
+                    </li>
+                    <li class="navbar-icon">
+                        <a href="https://twitter.com/danclaudiupop">
+                            <i class="fa fa-twitter fa-fw fa-2x"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <section class="post">
+            <header class="post-header">
+                <h3>Headless selenium tests in django with xvfbwrapper</h3>
+                <p class="post-meta">
+                    Vi 29 noiembrie 2013 &middot; tagged 
+                        <a class="post-category" href="http://blog.danclaudiupop.com/tag/functional.html">functional</a>
+                        <a class="post-category" href="http://blog.danclaudiupop.com/tag/django.html">django</a>
+                        <a class="post-category" href="http://blog.danclaudiupop.com/tag/headless.html">headless</a>
+                        <a class="post-category" href="http://blog.danclaudiupop.com/tag/xvfb.html">xvfb</a>
+                        <a class="post-category" href="http://blog.danclaudiupop.com/tag/selenium.html">selenium</a>
+                </p>
+            </header>
+        </section>
+        <section class="post-content">
+            <p>Install dependencies:</p>
+<ul class="simple">
+<li><tt class="docutils literal">sudo <span class="pre">apt-get</span> install xvfb</tt></li>
+<li><tt class="docutils literal">pip install xvfbwrapper</tt></li>
+</ul>
+<p>This code uses selenium and xvfbwrapper to run tests with Firefox inside a
+headless display.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">LiveServerTestCase</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.firefox.webdriver</span> <span class="kn">import</span> <span class="n">WebDriver</span>
+<span class="kn">from</span> <span class="nn">xvfbwrapper</span> <span class="kn">import</span> <span class="n">Xvfb</span>
+
+<span class="k">class</span> <span class="nc">SeleniumTestCase</span><span class="p">(</span><span class="n">LiveServerTestCase</span><span class="p">):</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">setUpClass</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">xvfb</span> <span class="o">=</span> <span class="n">Xvfb</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1280</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">xvfb</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">wd</span> <span class="o">=</span> <span class="n">WebDriver</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SeleniumTestCase</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">setUpClass</span><span class="p">()</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">tearDownClass</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">wd</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SeleniumTestCase</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">tearDownClass</span><span class="p">()</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">xvfb</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+
+        </section>
+<footer class="footer">
+    &copy; blog.danclaudiupop &ndash;
+        Proudly published with <a href="http://blog.getpelican.com/">Pelican</a>
+</footer>    </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62968573-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <!-- End Document
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
