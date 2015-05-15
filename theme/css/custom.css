@@ -1,6 +1,11 @@
 .container {
     max-width: 800px;
 }
+.content-subhead {
+    color: #9eabb3;
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
+}
 .post-content {
     color: #3a4145;
     font-family: "Merriweather",serif;
