@@ -1,16 +1,15 @@
 $(document).ready(function() {
 
   // Variables
-  var $codeSnippets = $nav = $('.navbar'),
+  var $nav = $('.navbar'),
       $body = $('body'),
       $window = $(window),
-      navOffsetTop = $nav.offset().top,
+      navOffsetTop = $nav.offset().top-90,
       $document = $(document)
 
   function init() {
     $window.on('scroll', onScroll)
   }
-
 
   function onScroll() {
     if(navOffsetTop < $window.scrollTop() && !$body.hasClass('has-docked-nav')) {
