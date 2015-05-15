@@ -4,7 +4,7 @@ $(document).ready(function() {
   var $nav = $('.navbar'),
       $body = $('body'),
       $window = $(window),
-      navOffsetTop = $nav.offset().top-90,
+      navOffsetTop = $nav.offset().top-100,
       $document = $(document)
 
   function init() {
