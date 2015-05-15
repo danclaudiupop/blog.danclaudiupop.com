@@ -114,7 +114,7 @@ img {
 .navbar {
     border-top-width: 0;
 }
-.navbar, .navbar-spacer {
+.navbar {
     background: none repeat scroll 0 0 #fff;
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
@@ -122,9 +122,6 @@ img {
     height: 6.5rem;
     width: 100%;
     z-index: 99;
-}
-.navbar-spacer {
-    display: none;
 }
 .navbar > .container {
     width: 100%;
@@ -156,15 +153,4 @@ img {
 }
 .navbar-link.active {
     color: #33c3f0;
-}
-.has-docked-nav .navbar {
-    left: 0;
-    position: fixed;
-    top: 0;
-}
-.has-docked-nav .navbar-spacer {
-    display: block;
-}
-.has-docked-nav .navbar > .container {
-    width: 80%;
 }
