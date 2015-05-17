@@ -589,7 +589,7 @@ lxml or html5lib for parsing the content)&lt;/li&gt;
 &lt;p&gt;Be a good person and write functional tests. Functional testing is something
 that every app needs, no testing strategy is complete without high-level tests
 to ensure the entire programming system works together.&lt;/p&gt;
-</summary><category term="functional"></category><category term="lettuce"></category><category term="django test client"></category><category term="selenium"></category></entry><entry><title>Book review: Explore it! by Elisabeth Hendrickson</title><link href="http://blog.danclaudiupop.com/explore-it/" rel="alternate"></link><updated>2013-01-07T10:20:00+02:00</updated><author><name>Ramona Suciu</name></author><id>tag:blog.danclaudiupop.com,2013-01-07:explore-it/</id><summary type="html">&lt;p&gt;There are many ways to test a software product. There are many methodologies
+</summary><category term="functional"></category><category term="lettuce"></category><category term="django test client"></category><category term="selenium"></category></entry><entry><title>Book review: Explore it! by Elisabeth Hendrickson</title><link href="http://blog.danclaudiupop.com/explore-it/" rel="alternate"></link><updated>2013-01-07T10:20:00+02:00</updated><author><name>danclaudiupop</name></author><id>tag:blog.danclaudiupop.com,2013-01-07:explore-it/</id><summary type="html">&lt;p&gt;There are many ways to test a software product. There are many methodologies
 that could help in testing that software product, so that the final release
 contains as less bugs as possible. We are not at the point where we could say
 that we have found the solution for bug free applications. But we are at the
