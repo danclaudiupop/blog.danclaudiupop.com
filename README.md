@@ -1,4 +1,4 @@
-shing
+Publishing
 ----------
 
 Commit content and images as required, push to master. Then...
