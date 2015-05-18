@@ -1,0 +1,8 @@
+/output/
+/theme/
+/cache/
+/pelican-plugins/
+tags
+dev_pelicanconf.py
+*.pyc
+*.pid
