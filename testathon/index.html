@@ -5,7 +5,7 @@
     <!-- Basic Page Needs
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
-    <title>About | blog.danclaudiupop | Software Testing and more</title>
+    <title>Testathon experience - Cluj-Napoca, 2015 | blog.danclaudiupop | Software Testing and more</title>
     <meta name="description" content="blog.danclaudiupop, Software Testing and more">
     <meta name="author" content="danclaudiupop">
 
@@ -32,6 +32,12 @@
     <!-- Scripts
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.1.0/jquery.fitvids.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".container").fitVids();
+        });
+    </script>
 
     <!-- Favicon
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -72,20 +78,71 @@
             </div>
         </nav>
     </div>
-<div class="container">
-    <section class="post-content">
-        <p>Hi.</p>
-<p>I'm Dan Claudiu Pop. I work for 3 Pillar Global as Automation Test Lead. I
-love Python.</p>
-<p>Speaker at Romanian Testing Comunity 2013. Interested in all aspects of testing
-but mostly in how to get it done. Open source enthusiast.</p>
-<p>Blog theme can be found here: <a class="reference external" href="https://github.com/danclaudiupop/skeleton">https://github.com/danclaudiupop/skeleton</a></p>
+    <div class="container">
+        <section class="post">
+            <header class="post-header">
+                <h3>Testathon experience - Cluj-Napoca, 2015</h3>
+                <p class="post-meta">
+                    01 iunie 2015 &middot; tagged 
+                        <a class="post-category" href="http://blog.danclaudiupop.com/tag/testathon.html">testathon</a>
+                </p>
+            </header>
+        </section>
+        <section class="post-content">
+            <p>Following the popular Hackathon format, testers from all around the world have
+expressed their intention to organize a similar competition, where, in theory
+at least, the best engineers would have the opportunity to test new
+applications, and discover all kinds of bugs.</p>
+<p>There are prizes of course, for best security bug, or best report, or even best
+QA engineer.</p>
+<p>I was looking forward to being involved in this competition since this year it
+was being held in Cluj-Napoca as well.</p>
+<p>Overall, I had appreciated the intention and the scope of the Testathon Cluj
+2015 edition. However, there are a few aspects which made this experience a
+little disappointing for me:</p>
+<ul class="simple">
+<li>The quantity was very important. Not that this necessarily a bad thing, but I
+would have liked to see more bold approaches and not rely solely on manual
+testing (even if we were testing on mobile devices).</li>
+<li>People were a little agitated, and I believe they have not fully captured the
+essence of this competition. For me, as I saw it, it was more about working
+together as a team (testers from different companies and even different
+cities) to make the application under test better. What I felt instead was
+that each of the participants was eager to prove they’re better than the
+rest, and while I agree that a little competition did not hurt anyone, I
+would have liked to see more of that passion in testing the app, and not
+winning some prize.</li>
+<li>It was unclear how the prizes were decided. More exactly, I believe that a
+security bug which crashed the servers and rendered the application unusable
+should have received the proper praises. Instead, this defect was almost
+ignored (at least when it came to awarding the title for “Best security
+bug”). To be honest, I was expecting to win. I've decompiled the apk, run a
+python script to search for sensitive data (grep would suffice), found their
+API calls, no authentication, authorization nor throttling whatsoever. Used
+locust.io and testing session was over for all participants. They gave me a
+prize, but after the big winners were annoubced and since I had to attend to
+wedding I had to leave earlier. No worries, they gave the prize (an ipod) to
+someone else :)</li>
+</ul>
+<p>At the end of the day, I was happy that the testing community from Cluj-Napoca
+is getting more visibility worldwide. I met some cool people at the event.</p>
 
-    </section>
-<footer class="footer">
+        </section>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'danclaudiupop';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><footer class="footer">
     &copy; blog.danclaudiupop &ndash;
         Proudly published with <a href="http://blog.getpelican.com/">Pelican</a>
-</footer></div>
+</footer>    </div>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

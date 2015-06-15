@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>blog.danclaudiupop</title><link href="http://blog.danclaudiupop.com/" rel="alternate"></link><link href="http://localhost:8000/feeds/danclaudiupop.atom.xml" rel="self"></link><id>http://blog.danclaudiupop.com/</id><updated>2014-03-06T00:00:00+02:00</updated><entry><title>Beginners guide to functionally test an API in Django</title><link href="http://blog.danclaudiupop.com/guide-to-functionally-test-an-api-in-django/" rel="alternate"></link><updated>2014-03-06T00:00:00+02:00</updated><author><name>danclaudiupop</name></author><id>tag:blog.danclaudiupop.com,2014-03-06:guide-to-functionally-test-an-api-in-django/</id><summary type="html">&lt;p&gt;To set up our django development environment, we'll start by creating a
+<feed xmlns="http://www.w3.org/2005/Atom"><title>blog.danclaudiupop</title><link href="http://blog.danclaudiupop.com/" rel="alternate"></link><link href="http://localhost:8000/feeds/danclaudiupop.atom.xml" rel="self"></link><id>http://blog.danclaudiupop.com/</id><updated>2015-06-01T00:00:00+03:00</updated><entry><title>Testathon experience - Cluj-Napoca, 2015</title><link href="http://blog.danclaudiupop.com/testathon/" rel="alternate"></link><updated>2015-06-01T00:00:00+03:00</updated><author><name>danclaudiupop</name></author><id>tag:blog.danclaudiupop.com,2015-06-01:testathon/</id><summary type="html">&lt;p&gt;Following the popular Hackathon format, testers from all around the world have
+expressed their intention to organize a similar competition, where, in theory
+at least, the best engineers would have the opportunity to test new
+applications, and discover all kinds of bugs.&lt;/p&gt;
+&lt;p&gt;There are prizes of course, for best security bug, or best report, or even best
+QA engineer.&lt;/p&gt;
+&lt;p&gt;I was looking forward to being involved in this competition since this year it
+was being held in Cluj-Napoca as well.&lt;/p&gt;
+&lt;p&gt;Overall, I had appreciated the intention and the scope of the Testathon Cluj
+2015 edition. However, there are a few aspects which made this experience a
+little disappointing for me:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;The quantity was very important. Not that this necessarily a bad thing, but I
+would have liked to see more bold approaches and not rely solely on manual
+testing (even if we were testing on mobile devices).&lt;/li&gt;
+&lt;li&gt;People were a little agitated, and I believe they have not fully captured the
+essence of this competition. For me, as I saw it, it was more about working
+together as a team (testers from different companies and even different
+cities) to make the application under test better. What I felt instead was
+that each of the participants was eager to prove they’re better than the
+rest, and while I agree that a little competition did not hurt anyone, I
+would have liked to see more of that passion in testing the app, and not
+winning some prize.&lt;/li&gt;
+&lt;li&gt;It was unclear how the prizes were decided. More exactly, I believe that a
+security bug which crashed the servers and rendered the application unusable
+should have received the proper praises. Instead, this defect was almost
+ignored (at least when it came to awarding the title for “Best security
+bug”). To be honest, I was expecting to win. I've decompiled the apk, run a
+python script to search for sensitive data (grep would suffice), found their
+API calls, no authentication, authorization nor throttling whatsoever. Used
+locust.io and testing session was over for all participants. They gave me a
+prize, but after the big winners were annoubced and since I had to attend to
+wedding I had to leave earlier. No worries, they gave the prize (an ipod) to
+someone else :)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;At the end of the day, I was happy that the testing community from Cluj-Napoca
+is getting more visibility worldwide. I met some cool people at the event.&lt;/p&gt;
+</summary><category term="testathon"></category></entry><entry><title>Beginners guide to functionally test an API in Django</title><link href="http://blog.danclaudiupop.com/guide-to-functionally-test-an-api-in-django/" rel="alternate"></link><updated>2014-03-06T00:00:00+02:00</updated><author><name>danclaudiupop</name></author><id>tag:blog.danclaudiupop.com,2014-03-06:guide-to-functionally-test-an-api-in-django/</id><summary type="html">&lt;p&gt;To set up our django development environment, we'll start by creating a
 virtual environment. Execute the following commands in the terminal:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;virtualenv&lt;/span&gt; &lt;span class="n"&gt;temp&lt;/span&gt;
 &lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="nb"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;activate&lt;/span&gt;
